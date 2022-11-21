@@ -1,0 +1,12 @@
+name: BingoTests
+version: '${project.version}'
+main: bingotests.bingotests.BingoTests
+api-version: 1.19
+authors: [ dvarlan ]
+description: A test Plugin for Minecraft Bingo
+website: https://github.com/dvarlan
+commands:
+  top:
+    description: Teleports the player back to the surface
+  team:
+    description: Lets the user interact with the teams
