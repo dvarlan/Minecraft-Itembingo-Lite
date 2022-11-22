@@ -2,14 +2,13 @@ package bingotests.bingotests.commands;
 
 import org.bukkit.Bukkit;
 import org.bukkit.Location;
+import org.bukkit.World;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
 import org.bukkit.entity.Player;
-import org.bukkit.potion.PotionEffect;
 import org.jetbrains.annotations.NotNull;
 
-import static org.bukkit.potion.PotionEffectType.REGENERATION;
 
 public class TopCommand implements CommandExecutor {
     @Override
@@ -33,18 +32,24 @@ public class TopCommand implements CommandExecutor {
     }
 
     private void teleportPlayer(Player player) {
-        Location Current = player.getLocation();
         Location Top = player.getLocation().toHighestLocation();
-        // To stop the glitch where the player would spawn in the block
-        Top.setY(Top.getY() + 1);
 
-        if(Current.getY() >= -60 && Current.getY() <= 60) {
-            player.teleport(Top);
-            player.sendMessage("You used the top command!");
-            // To heal the player in case they somehow suffocate:
-            // player.addPotionEffect(new PotionEffect(REGENERATION, 20, 5));
+        // Check if the player is currently in the nether -> teleports them to the overworld
+        if(player.getWorld().getName().contains("nether")) {
+            Top = calculateOverworldCoordinates(player);
         } else {
-            player.sendMessage("You cannot use this command right now, try changing your y-Position!");
+            // To stop the glitch where the player would spawn in the block
+            Top.setY(Top.getY() + 1);
         }
+        player.teleport(Top);
+        player.sendMessage("You used the top command!");
+
+    }
+
+    private Location calculateOverworldCoordinates(Player player) {
+        World world = Bukkit.getWorld("world");
+        Location l = new Location(world, player.getLocation().getX() * 8, 0, player.getLocation().getZ() * 8);
+        l.setY(world.getHighestBlockAt(l).getY() + 1);
+        return l;
     }
 }
