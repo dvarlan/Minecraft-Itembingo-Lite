@@ -1,5 +1,6 @@
 package bingotests.bingotests.commands;
 
+import bingotests.bingotests.BingoTests;
 import bingotests.bingotests.team.Team;
 import bingotests.bingotests.team.TeamHandler;
 import org.bukkit.Bukkit;
@@ -12,7 +13,7 @@ import org.jetbrains.annotations.NotNull;
 
 public class TeamCommand implements CommandExecutor{
 
-    TeamHandler handler = new TeamHandler();
+    TeamHandler handler = BingoTests.getMain().getHandler();
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {

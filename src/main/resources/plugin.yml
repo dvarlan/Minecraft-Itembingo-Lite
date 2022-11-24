@@ -10,3 +10,5 @@ commands:
     description: Teleports the player back to the surface
   team:
     description: Lets the user interact with the teams
+  bingoboard:
+    description: Test command for showing and randomly filling the bingoboard
