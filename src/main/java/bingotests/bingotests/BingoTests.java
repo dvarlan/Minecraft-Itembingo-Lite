@@ -3,6 +3,7 @@ package bingotests.bingotests;
 import bingotests.bingotests.commands.BingoboardCommand;
 import bingotests.bingotests.commands.TeamCommand;
 import bingotests.bingotests.commands.TopCommand;
+import bingotests.bingotests.listeners.InventoryListener;
 import bingotests.bingotests.team.TeamHandler;
 import net.kyori.adventure.text.Component;
 import org.bukkit.Bukkit;
@@ -33,6 +34,8 @@ public final class BingoTests extends JavaPlugin {
         Objects.requireNonNull(getCommand("top")).setExecutor(new TopCommand());
         Objects.requireNonNull(getCommand("team")).setExecutor(new TeamCommand());
         Objects.requireNonNull(getCommand("bingoboard")).setExecutor(new BingoboardCommand());
+
+        Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
     }
 
     @Override

@@ -32,7 +32,7 @@ public class BingoboardCommand implements CommandExecutor {
         if (args.length != 0 && args[0].equalsIgnoreCase("random")) {
             for (int i = 0; i < 9; ++i) {
                ItemStack item = new ItemStack(getRandom());
-               player.sendMessage(item.toString());
+               //DEBUG player.sendMessage(item.toString());
                inventory.setItem(i, item);
                BingoTests.getMain().getBingo().add(item);
             }
