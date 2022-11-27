@@ -11,4 +11,6 @@ commands:
   team:
     description: Lets the user interact with the teams
   bingoboard:
-    description: Test command for showing and randomly filling the bingoboard
+    description: Command for showing and randomly filling the bingoboard
+  bingo:
+    description: Checks if the player / team obtained all items & ends the game

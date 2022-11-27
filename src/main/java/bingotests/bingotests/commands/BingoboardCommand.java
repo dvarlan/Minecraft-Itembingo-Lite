@@ -19,7 +19,6 @@ public class BingoboardCommand implements CommandExecutor {
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
-        // This Command is only for testing right now
         if(!(sender instanceof Player)) {
             Bukkit.getLogger().info("Only players can use this command!");
             return false;
@@ -30,6 +29,12 @@ public class BingoboardCommand implements CommandExecutor {
 
         // Fills board with random items and stores them in a list for checking later
         if (args.length != 0 && args[0].equalsIgnoreCase("random")) {
+
+            // Clears the list if the random command is used more than once
+            if (!(BingoTests.getMain().getBingo().isEmpty())) {
+                BingoTests.getMain().getBingo().clear();
+            }
+
             for (int i = 0; i < 9; ++i) {
                ItemStack item = new ItemStack(getRandom());
                //DEBUG player.sendMessage(item.toString());

@@ -1,5 +1,6 @@
 package bingotests.bingotests;
 
+import bingotests.bingotests.commands.BingoCommand;
 import bingotests.bingotests.commands.BingoboardCommand;
 import bingotests.bingotests.commands.TeamCommand;
 import bingotests.bingotests.commands.TopCommand;
@@ -34,6 +35,7 @@ public final class BingoTests extends JavaPlugin {
         Objects.requireNonNull(getCommand("top")).setExecutor(new TopCommand());
         Objects.requireNonNull(getCommand("team")).setExecutor(new TeamCommand());
         Objects.requireNonNull(getCommand("bingoboard")).setExecutor(new BingoboardCommand());
+        Objects.requireNonNull(getCommand("bingo")).setExecutor(new BingoCommand());
 
         Bukkit.getPluginManager().registerEvents(new InventoryListener(), this);
     }
