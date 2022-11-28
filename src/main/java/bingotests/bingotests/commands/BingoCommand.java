@@ -3,7 +3,11 @@ package bingotests.bingotests.commands;
 import bingotests.bingotests.BingoTests;
 import bingotests.bingotests.team.Team;
 import bingotests.bingotests.team.TeamHandler;
+import net.kyori.adventure.text.Component;
+import net.kyori.adventure.title.Title;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
+import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
@@ -29,7 +33,7 @@ public class BingoCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        // TODO: This feature still requires testing!
+        // TODO: This feature still requires testing in multiplayer!
         // Creates a teaminv out of all the team members inventories & checks if all items were obtained
         if(!(handler.getTeamlist().isEmpty())) {
             for(Team t : handler.getTeamlist()) {
@@ -49,6 +53,7 @@ public class BingoCommand implements CommandExecutor {
                 }
             }
             player.sendMessage("Your team obtained every item!");
+            showWinner(player);
             return false;
         }
 
@@ -61,6 +66,27 @@ public class BingoCommand implements CommandExecutor {
             }
         }
         player.sendMessage("You obtained every item!");
+        showWinner(player);
         return false;
     }
+
+    public void showWinner(@NotNull Player winner) {
+
+        String winnerteam = winner.getName();
+
+        if(!(handler.getTeamlist().isEmpty())) {
+            for (Team t : handler.getTeamlist()) {
+                if (t.getMembers().contains(winner)) {
+                    winnerteam = t.getTeamname();
+                }
+            }
+        }
+
+        for (Player p : Bukkit.getOnlinePlayers()) {
+            p.teleport(winner.getLocation());
+            p.showTitle(Title.title(Component.text(ChatColor.GOLD + "TEAM "+ winnerteam + " WON!"), Component.text("")));
+            p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_CELEBRATE, 1, 1);
+        }
+    }
+
 }
