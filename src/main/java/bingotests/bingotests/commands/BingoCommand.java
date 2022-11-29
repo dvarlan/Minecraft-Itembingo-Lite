@@ -11,8 +11,11 @@ import org.bukkit.Sound;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
 import org.bukkit.command.CommandSender;
+import org.bukkit.entity.EntityType;
 import org.bukkit.entity.Player;
 import org.bukkit.inventory.ItemStack;
+import org.bukkit.potion.PotionEffect;
+import org.bukkit.potion.PotionEffectType;
 import org.jetbrains.annotations.NotNull;
 
 import java.util.ArrayList;
@@ -47,12 +50,14 @@ public class BingoCommand implements CommandExecutor {
             }
             for(ItemStack i : BingoTests.getMain().getBingo()) {
                 if(!(teaminv.contains(i))) {
-                    player.sendMessage("Your team did not obtain every item!");
+                    player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                            + ChatColor.GRAY + "Your team did NOT obtain every item!");
                     teaminv.clear();
                     return false;
                 }
             }
-            player.sendMessage("Your team obtained every item!");
+            player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                    + ChatColor.GRAY + "Your team obtained every item!");
             showWinner(player);
             return false;
         }
@@ -61,11 +66,13 @@ public class BingoCommand implements CommandExecutor {
         for(ItemStack i : BingoTests.getMain().getBingo()) {
             //DEBUG player.sendMessage(i.toString());
             if(!(player.getInventory().contains(i))) {
-                player.sendMessage("You did not obtain every item!");
+                player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                        + ChatColor.GRAY + "You did NOT obtain every item!");
                 return false;
             }
         }
-        player.sendMessage("You obtained every item!");
+        player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                + ChatColor.GRAY + "You obtained every item!");
         showWinner(player);
         return false;
     }
@@ -76,6 +83,9 @@ public class BingoCommand implements CommandExecutor {
 
         if(!(handler.getTeamlist().isEmpty())) {
             for (Team t : handler.getTeamlist()) {
+                for(Player p : t.getMembers()) {
+                    p.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 99999, 1));
+                }
                 if (t.getMembers().contains(winner)) {
                     winnerteam = t.getTeamname();
                 }
@@ -84,9 +94,11 @@ public class BingoCommand implements CommandExecutor {
 
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.teleport(winner.getLocation());
-            p.showTitle(Title.title(Component.text(ChatColor.GOLD + "TEAM "+ winnerteam + " WON!"), Component.text("")));
+            p.showTitle(Title.title(Component.text(ChatColor.GOLD + "TEAM "+ winnerteam + " WON!"), Component.text("GG!")));
             p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_CELEBRATE, 1, 1);
         }
-    }
 
+        winner.getWorld().spawnEntity(winner.getLocation().add(1,1,1), EntityType.FIREWORK);
+        winner.addPotionEffect(new PotionEffect(PotionEffectType.GLOWING, 500, 1));
+    }
 }

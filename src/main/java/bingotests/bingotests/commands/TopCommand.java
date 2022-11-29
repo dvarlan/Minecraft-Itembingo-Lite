@@ -1,6 +1,7 @@
 package bingotests.bingotests.commands;
 
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Location;
 import org.bukkit.World;
 import org.bukkit.command.Command;
@@ -42,13 +43,15 @@ public class TopCommand implements CommandExecutor {
             Top.setY(Top.getY() + 1);
         }
         player.teleport(Top);
-        player.sendMessage("You used the top command!");
+        player.sendMessage(ChatColor.BLUE + "[Top] "
+                + ChatColor.GRAY + "You used the top command!");
 
     }
 
     private Location calculateOverworldCoordinates(Player player) {
         World world = Bukkit.getWorld("world");
         Location l = new Location(world, player.getLocation().getX() * 8, 0, player.getLocation().getZ() * 8);
+        assert world != null;
         l.setY(world.getHighestBlockAt(l).getY() + 1);
         return l;
     }

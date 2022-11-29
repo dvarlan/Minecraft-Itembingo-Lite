@@ -7,9 +7,9 @@ description: A test Plugin for Minecraft Bingo
 website: https://github.com/dvarlan
 commands:
   top:
-    description: Teleports the player back to the surface
+    description: Teleports the player back to the surface or the overworld if in the nether
   team:
-    description: Lets the user interact with the teams
+    description: Lets the user manipulate / interact with teams
   bingoboard:
     description: Command for showing and randomly filling the bingoboard
   bingo:

@@ -63,7 +63,7 @@ public class TeamCommand implements CommandExecutor{
             case "list":
                 player.sendMessage(ChatColor.GOLD + "Teams: ");
                 for(int i = 0; i < handler.getTeamlist().size(); i++) {
-                    player.sendMessage(ChatColor.AQUA + "[+] " + handler.getTeamlist().get(i).getTeamname() + " | SCORE: " + handler.getTeamlist().get(i).getScore());
+                    player.sendMessage(ChatColor.AQUA + "[+] " + handler.getTeamlist().get(i).getTeamname());
                     for (int j = 0; j < handler.getTeamlist().get(i).getMembers().size(); j++) {
                         player.sendMessage(ChatColor.GRAY + "    [-] " + handler.getTeamlist().get(i).getMembers().get(j).getName());
                     }

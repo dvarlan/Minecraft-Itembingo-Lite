@@ -10,8 +10,6 @@ public class Team {
     private String teamname;
     private ArrayList<Player> members = new ArrayList<>();
 
-    private Integer score = 0;
-
     public Team(String teamname) {
         setTeamname(teamname);
         setMembers(members);
@@ -41,13 +39,5 @@ public class Team {
 
     public void removeMember(Player member) {
         members.remove(member);
-    }
-
-    public Integer getScore() {
-        return score;
-    }
-
-    public void setScore(Integer score) {
-        this.score = score;
     }
 }
