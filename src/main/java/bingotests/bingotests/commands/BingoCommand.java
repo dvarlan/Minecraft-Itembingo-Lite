@@ -36,7 +36,6 @@ public class BingoCommand implements CommandExecutor {
 
         Player player = (Player) sender;
 
-        // TODO: This feature still requires testing in multiplayer!
         // Creates a teaminv out of all the team members inventories & checks if all items were obtained
         if(!(handler.getTeamlist().isEmpty())) {
             for(Team t : handler.getTeamlist()) {

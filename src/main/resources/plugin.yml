@@ -14,3 +14,5 @@ commands:
     description: Command for showing and randomly filling the bingoboard
   bingo:
     description: Checks if the player / team obtained all items & ends the game
+  bingohelp:
+    description: Help command for this plugin

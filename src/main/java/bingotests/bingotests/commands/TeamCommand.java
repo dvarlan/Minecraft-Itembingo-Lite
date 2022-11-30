@@ -61,13 +61,14 @@ public class TeamCommand implements CommandExecutor{
                         + ChatColor.GRAY + "No team with the name " + args[1] + " was found!");
                 return false;
             case "list":
-                player.sendMessage(ChatColor.GOLD + "Teams: ");
+                player.sendMessage(ChatColor.BLUE + "---------------\n" + ChatColor.GOLD + "Teams: ");
                 for(int i = 0; i < handler.getTeamlist().size(); i++) {
                     player.sendMessage(ChatColor.AQUA + "[+] " + handler.getTeamlist().get(i).getTeamname());
                     for (int j = 0; j < handler.getTeamlist().get(i).getMembers().size(); j++) {
                         player.sendMessage(ChatColor.GRAY + "    [-] " + handler.getTeamlist().get(i).getMembers().get(j).getName());
                     }
                 }
+                player.sendMessage(ChatColor.BLUE + "---------------");
                 return false;
             case "join":
                 if (args.length != 2 || args[1].isEmpty()) {
