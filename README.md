@@ -1,4 +1,4 @@
-# BingoTests
+# Minecraft Itembingo (Lite)
 A simple Minecraft Itembingo plugin for Minecraft 1.19.x!\
 You can also use this plugin in combination with [my timer plugin](https://github.com/dvarlan/Minecraft-Timer)!
 
