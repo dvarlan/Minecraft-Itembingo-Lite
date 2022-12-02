@@ -16,7 +16,9 @@ You can also use this plugin in combination with [my timer plugin](https://githu
 - `/team`: Lets the user manipulate / interact with teams (create, delete, join, leave, list)
 - `/top`: Teleports the player back to the surface or the overworld if in the nether
 - `/bingoboard`: Shows the current bingoboard
+- `/bingoboard add ITEM_1 ITEM_2 ... ITEM_9`: Adds the 9 specified items to the board \
+   **Note:** The itemnames have to be the ones from [here](https://hub.spigotmc.org/javadocs/bukkit/org/bukkit/Material.html) for the command to work!\
+   E.g. BLUE_DYE, ACACIA_PRESSURE_PLATE, COAL_ORE ...
 - `/bingoboard random`: Randomly fills the bingoboard with items \
     **Note:** If there are empty spots on the board rerun the command!
 - `/bingo`: Checks if the player / team obtained all items & ends the game \
-   **IMPORTANT:** As of right now the command only works when you have exactly 1 of every item. Fix will be implemented soon!
