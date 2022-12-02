@@ -18,4 +18,5 @@ You can also use this plugin in combination with [my timer plugin](https://githu
 - `/bingoboard`: Shows the current bingoboard
 - `/bingoboard random`: Randomly fills the bingoboard with items \
     **Note:** If there are empty spots on the board rerun the command!
-- `/bingo`: Checks if the player / team obtained all items & ends the game
+- `/bingo`: Checks if the player / team obtained all items & ends the game \
+   **IMPORTANT:** As of right now the command only works when you have exactly 1 of every item. Fix will be implemented soon!
