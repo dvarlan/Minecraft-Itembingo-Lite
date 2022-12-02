@@ -25,6 +25,8 @@ public class BingoCommand implements CommandExecutor {
 
     TeamHandler handler = BingoTests.getMain().getHandler();
     ArrayList<ItemStack> teaminv = new ArrayList<>();
+    ArrayList<ItemStack> bingoboard = BingoTests.getMain().getBingo();
+    int score = 0;
 
     @Override
     public boolean onCommand(@NotNull CommandSender sender, @NotNull Command command, @NotNull String label, @NotNull String[] args) {
@@ -47,29 +49,48 @@ public class BingoCommand implements CommandExecutor {
                    }
                 }
             }
-            for(ItemStack i : BingoTests.getMain().getBingo()) {
-                if(!(teaminv.contains(i))) {
-                    player.sendMessage(ChatColor.BLUE + "[Bingo] "
-                            + ChatColor.GRAY + "Your team did NOT obtain every item!");
-                    teaminv.clear();
-                    return false;
+
+            // New Method for checking items & ignoring the item count
+            // TODO: Requires multiplayer testing
+
+            for (ItemStack itemStack : bingoboard) {
+                for (ItemStack stack : teaminv) {
+                    if (itemStack.isSimilar(stack)) {
+                        score++;
+                        break;
+                    }
                 }
             }
+            if(score != 9) {
+                player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                        + ChatColor.GRAY + "Your team did NOT obtain every item!");
+                teaminv.clear();
+                score = 0;
+                return false;
+            }
+
             player.sendMessage(ChatColor.BLUE + "[Bingo] "
                     + ChatColor.GRAY + "Your team obtained every item!");
             showWinner(player);
             return false;
         }
 
-
-        for(ItemStack i : BingoTests.getMain().getBingo()) {
-            //DEBUG player.sendMessage(i.toString());
-            if(!(player.getInventory().contains(i))) {
-                player.sendMessage(ChatColor.BLUE + "[Bingo] "
-                        + ChatColor.GRAY + "You did NOT obtain every item!");
-                return false;
+        for (ItemStack itemStack : bingoboard) {
+            for (ItemStack stack : player.getInventory().getContents()) {
+                if (itemStack.isSimilar(stack)) {
+                    score++;
+                    break;
+                }
             }
         }
+
+        if(score != 9) {
+            player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                    + ChatColor.GRAY + "You did NOT obtain every item!");
+            score = 0;
+            return false;
+        }
+
         player.sendMessage(ChatColor.BLUE + "[Bingo] "
                 + ChatColor.GRAY + "You obtained every item!");
         showWinner(player);

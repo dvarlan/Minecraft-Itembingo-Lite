@@ -2,6 +2,7 @@ package bingotests.bingotests.commands;
 
 import bingotests.bingotests.BingoTests;
 import org.bukkit.Bukkit;
+import org.bukkit.ChatColor;
 import org.bukkit.Material;
 import org.bukkit.command.Command;
 import org.bukkit.command.CommandExecutor;
@@ -11,6 +12,7 @@ import org.bukkit.inventory.Inventory;
 import org.bukkit.inventory.ItemStack;
 import org.jetbrains.annotations.NotNull;
 
+import java.util.Objects;
 import java.util.Random;
 
 public class BingoboardCommand implements CommandExecutor {
@@ -42,6 +44,30 @@ public class BingoboardCommand implements CommandExecutor {
                BingoTests.getMain().getBingo().add(item);
             }
             player.openInventory(inventory);
+            return false;
+        } else if (args.length != 0 && args[0].equalsIgnoreCase("add")) {
+            // Lets the user add his own items (need to follow the Material syntax)
+            if (args.length != 10) {
+                player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                        + ChatColor.GRAY + "Please specify all 9 Items at once! Like this: \n" +
+                        "/bingoboard add ITEM_1 ITEM_2 ...");
+                return false;
+            }
+
+            try {
+                for (int i = 1; i < args.length; ++i) {
+                    ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(args[i])));
+                    player.sendMessage("You requested the Item: " + item);
+                    inventory.setItem(i - 1, item);
+                    BingoTests.getMain().getBingo().add(item);
+                }
+                player.openInventory(inventory);
+            } catch (NullPointerException e) {
+                inventory.clear();
+                BingoTests.getMain().getBingo().clear();
+                player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                        + ChatColor.GRAY + "Could not find the specified items! List the items like this: ACACIA_PLANKS BLACK_DYE ...");
+            }
             return false;
         }
 

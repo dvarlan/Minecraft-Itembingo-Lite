@@ -24,6 +24,7 @@ public class HelpCommand implements CommandExecutor {
                 ChatColor.GOLD + "[+] " + "/team | " + ChatColor.GRAY + "Let´s the player interact / manipulate teams\n" +
                 ChatColor.GOLD + "[+] " + "/bingoboard | " + ChatColor.GRAY + "Shows the current board\n" +
                 ChatColor.GOLD + "[+] " + "/bingoboard random | " + ChatColor.GRAY + "Fills the board with random items\n" +
+                ChatColor.GOLD + "[+] " + "/bingoboard add ITEM1 ITEM2 ... ITEM9 | " + ChatColor.GRAY + "Fills the board with the 9 specified items, the names have to be in this style: BLUE_DYE\n" +
                 ChatColor.GOLD + "[+] " + "/bingo | " + ChatColor.GRAY + "Checks if the player / team has collected all the items & ends the game\n" +
                 ChatColor.GOLD + "[+] " + "/top | " + ChatColor.GRAY + "Teleports the player to the surface / overworld if in the nether\n" +
                 ChatColor.BLUE + "---------------");
