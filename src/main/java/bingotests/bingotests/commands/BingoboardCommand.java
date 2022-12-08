@@ -39,7 +39,6 @@ public class BingoboardCommand implements CommandExecutor {
 
             for (int i = 0; i < 9; ++i) {
                ItemStack item = new ItemStack(getRandom());
-               //DEBUG player.sendMessage(item.toString());
                inventory.setItem(i, item);
                BingoTests.getMain().getBingo().add(item);
             }
@@ -57,7 +56,8 @@ public class BingoboardCommand implements CommandExecutor {
             try {
                 for (int i = 1; i < args.length; ++i) {
                     ItemStack item = new ItemStack(Objects.requireNonNull(Material.getMaterial(args[i])));
-                    player.sendMessage("You requested the Item: " + item);
+                    player.sendMessage(ChatColor.BLUE + "[Bingo] "
+                            + ChatColor.GRAY + "You requested the Item: " + item);
                     inventory.setItem(i - 1, item);
                     BingoTests.getMain().getBingo().add(item);
                 }
