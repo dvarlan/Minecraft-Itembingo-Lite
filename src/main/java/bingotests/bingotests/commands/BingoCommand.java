@@ -50,8 +50,7 @@ public class BingoCommand implements CommandExecutor {
                 }
             }
 
-            // New Method for checking items & ignoring the item count
-            // TODO: Requires multiplayer testing
+            // Method for checking items & ignoring the item count
 
             for (ItemStack itemStack : bingoboard) {
                 for (ItemStack stack : teaminv) {
@@ -120,7 +119,7 @@ public class BingoCommand implements CommandExecutor {
         for (Player p : Bukkit.getOnlinePlayers()) {
             p.teleport(winner.getLocation());
             p.showTitle(Title.title(Component.text(ChatColor.GOLD + "TEAM "+ winnerteam + " WON!"), Component.text("GG!")));
-            p.playSound(p.getLocation(), Sound.ENTITY_VILLAGER_CELEBRATE, 1, 1);
+            p.playSound(p.getLocation(), Sound.ENTITY_PLAYER_LEVELUP, 1, 1);
         }
 
         winner.getWorld().spawnEntity(winner.getLocation().add(1,1,1), EntityType.FIREWORK);
